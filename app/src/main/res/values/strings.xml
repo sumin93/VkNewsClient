@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">VkNewsClient</string>
+    <string name="template_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</string>
 </resources>
