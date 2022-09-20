@@ -3,12 +3,16 @@ package com.sumin.vknewsclient
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.outlined.Delete
+import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
@@ -16,60 +20,71 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-           Test()
+            Test()
         }
     }
 }
 
 @Composable
 private fun Test() {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center,
-    ) {
-        Example3()
-    }
-}
-
-@Composable
-private fun Example1() {
-    OutlinedButton(onClick = {}) {
-        Text(text = "Hello World")
-    }
-}
-
-@Composable
-private fun Example2() {
-    TextField(
-        value = "Value",
-        onValueChange = {},
-        label = { Text(text = "Label") }
-    )
-}
-
-@Composable
-private fun Example3() {
-    AlertDialog(
-        onDismissRequest = {},
-        confirmButton = {
-            Text(
-                modifier = Modifier.padding(8.dp),
-                text = "Yes"
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(text = "TopAppBar title")
+                },
+                navigationIcon = {
+                    IconButton(onClick = {}) {
+                        Icon(Icons.Filled.Menu, contentDescription = null)
+                    }
+                }
             )
         },
-        title = {
-            Text(
-                text = "Are you sure?"
-            )
+        drawerContent = {
+            Text(text = "Text 1")
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(text = "Text 2")
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(text = "Text 3")
         },
-        text = {
-            Text(text = "Do you want to delete this file?")
-        },
-        dismissButton = {
-            Text(
-                modifier = Modifier.padding(8.dp),
-                text = "No"
-            )
+        bottomBar = {
+            BottomNavigation {
+                BottomNavigationItem(
+                    selected = true,
+                    onClick = {},
+                    icon = {
+                        Icon(Icons.Filled.Favorite, contentDescription = null)
+                    },
+                    label = {
+                        Text(text = "Favourite")
+                    }
+                )
+                BottomNavigationItem(
+                    selected = true,
+                    onClick = {},
+                    icon = {
+                        Icon(Icons.Outlined.Edit, contentDescription = null)
+                    },
+                    label = {
+                        Text(text = "Edit")
+                    }
+                )
+                BottomNavigationItem(
+                    selected = true,
+                    onClick = {},
+                    icon = {
+                        Icon(Icons.Outlined.Delete, contentDescription = null)
+                    },
+                    label = {
+                        Text(text = "Delete")
+                    }
+                )
+            }
         }
-    )
+    ) {
+        Text(
+            modifier = Modifier.padding(it),
+            text = "This is scaffold content"
+        )
+    }
 }
