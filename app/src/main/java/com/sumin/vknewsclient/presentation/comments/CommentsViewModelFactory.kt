@@ -1,4 +1,4 @@
-package com.sumin.vknewsclient
+package com.sumin.vknewsclient.presentation.comments
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
