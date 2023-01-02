@@ -1,6 +1,5 @@
 package com.sumin.vknewsclient.presentation.news
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -17,6 +16,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.sumin.vknewsclient.R
 import com.sumin.vknewsclient.domain.FeedPost
 import com.sumin.vknewsclient.domain.StatisticItem
@@ -41,11 +41,11 @@ fun PostCard(
             Spacer(modifier = Modifier.height(8.dp))
             Text(text = feedPost.contentText)
             Spacer(modifier = Modifier.height(8.dp))
-            Image(
+            AsyncImage(
+                model = feedPost.contentImageUrl,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(200.dp),
-                painter = painterResource(id = feedPost.contentImageResId),
+                    .wrapContentHeight(),
                 contentDescription = null,
                 contentScale = ContentScale.FillWidth
             )
@@ -69,11 +69,11 @@ private fun PostHeader(
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Image(
+        AsyncImage(
+            model = feedPost.communityImageUrl,
             modifier = Modifier
                 .size(50.dp)
                 .clip(CircleShape),
-            painter = painterResource(id = feedPost.avatarResId),
             contentDescription = null
         )
         Spacer(modifier = Modifier.width(8.dp))
