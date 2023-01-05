@@ -58,7 +58,7 @@ fun PostCard(
                 onCommentClickListener = onCommentClickListener,
                 onShareClickListener = onShareClickListener,
                 onViewsClickListener = onViewsClickListener,
-                isFavourite = feedPost.isFavourite
+                isFavourite = feedPost.isLiked
             )
         }
     }
