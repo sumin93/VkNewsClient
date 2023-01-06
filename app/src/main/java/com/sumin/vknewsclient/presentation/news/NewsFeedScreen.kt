@@ -17,8 +17,7 @@ import com.sumin.vknewsclient.ui.theme.DarkBlue
 
 @Composable
 fun NewsFeedScreen(
-    paddingValues: PaddingValues,
-    onCommentClickListener: (FeedPost) -> Unit
+    paddingValues: PaddingValues, onCommentClickListener: (FeedPost) -> Unit
 ) {
     val viewModel: NewsFeedViewModel = viewModel()
     val screenState = viewModel.screenState.observeAsState(NewsFeedScreenState.Initial)
@@ -33,8 +32,13 @@ fun NewsFeedScreen(
                 nextDataIsLoading = currentState.nextDataIsLoading
             )
         }
-        NewsFeedScreenState.Initial -> {
-
+        NewsFeedScreenState.Initial -> {}
+        NewsFeedScreenState.Loading -> {
+            Box(
+                modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator(color = DarkBlue)
+            }
         }
     }
 }
@@ -49,19 +53,11 @@ private fun FeedPosts(
     nextDataIsLoading: Boolean
 ) {
     LazyColumn(
-        modifier = Modifier.padding(paddingValues),
-        contentPadding = PaddingValues(
-            top = 16.dp,
-            start = 8.dp,
-            end = 8.dp,
-            bottom = 16.dp
-        ),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        modifier = Modifier.padding(paddingValues), contentPadding = PaddingValues(
+            top = 16.dp, start = 8.dp, end = 8.dp, bottom = 16.dp
+        ), verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        items(
-            items = posts,
-            key = { it.id }
-        ) { feedPost ->
+        items(items = posts, key = { it.id }) { feedPost ->
             val dismissState = rememberDismissState()
             if (dismissState.isDismissed(DismissDirection.EndToStart)) {
                 viewModel.remove(feedPost)
@@ -75,12 +71,6 @@ private fun FeedPosts(
             ) {
                 PostCard(
                     feedPost = feedPost,
-                    onViewsClickListener = { statisticItem ->
-                        viewModel.updateCount(feedPost, statisticItem)
-                    },
-                    onShareClickListener = { statisticItem ->
-                        viewModel.updateCount(feedPost, statisticItem)
-                    },
                     onCommentClickListener = {
                         onCommentClickListener(feedPost)
                     },
