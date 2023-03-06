@@ -1,4 +1,4 @@
-package com.sumin.vknewsclient.domain
+package com.sumin.vknewsclient.domain.entity
 
 data class PostComment(
     val id: Long,

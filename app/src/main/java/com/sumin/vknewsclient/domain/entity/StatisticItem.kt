@@ -1,4 +1,4 @@
-package com.sumin.vknewsclient.domain
+package com.sumin.vknewsclient.domain.entity
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
