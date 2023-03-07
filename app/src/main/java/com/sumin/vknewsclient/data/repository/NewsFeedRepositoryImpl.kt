@@ -1,8 +1,7 @@
 package com.sumin.vknewsclient.data.repository
 
-import android.app.Application
 import com.sumin.vknewsclient.data.mapper.NewsFeedMapper
-import com.sumin.vknewsclient.data.network.ApiFactory
+import com.sumin.vknewsclient.data.network.ApiService
 import com.sumin.vknewsclient.domain.entity.*
 import com.sumin.vknewsclient.domain.repository.NewsFeedRepository
 import com.sumin.vknewsclient.extensions.mergeWith
@@ -12,12 +11,13 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
+import javax.inject.Inject
 
-class NewsFeedRepositoryImpl(application: Application) : NewsFeedRepository {
-
-    private val apiService = ApiFactory.apiService
-    private val mapper = NewsFeedMapper()
-    private val storage = VKPreferencesKeyValueStorage(application)
+class NewsFeedRepositoryImpl @Inject constructor(
+    private val apiService: ApiService,
+    private val mapper: NewsFeedMapper,
+    private val storage: VKPreferencesKeyValueStorage,
+) : NewsFeedRepository {
 
     private val coroutineScope = CoroutineScope(Dispatchers.Default)
 
